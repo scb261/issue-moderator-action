@@ -41,7 +41,7 @@ export async function checkForDuplicateUrls() {
 
   const issueUrls = urlsFromIssueBody(issue.body);
   if (issueUrls.length === 0) {
-    core.info('No URLs found in the issue body');
+    core.info('No URLs found in the issue body change on different branch');
     return;
   }
 
