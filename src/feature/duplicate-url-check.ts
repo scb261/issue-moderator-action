@@ -11,7 +11,7 @@ import { urlsFromIssueBody } from '../util/urls';
 export async function checkForDuplicateUrls() {
   const payload = github.context.payload as IssuesEvent;
   if (!['opened'].includes(payload.action)) {
-    core.info('Irrelevant action trigger');
+    core.info('Irrelevant action trigger random change');
     return;
   }
 
