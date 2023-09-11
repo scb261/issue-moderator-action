@@ -6,6 +6,7 @@ URLs in the opened issues and close the new opened issue if needed.
 
 ---
 
+
 ## Installation
 
 To configure the action simply add the following lines to your workflow file:
