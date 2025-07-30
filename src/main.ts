@@ -17,7 +17,7 @@ async function run() {
     const { eventName, payload } = github.context;
 
     if (!payload.sender) {
-      throw new Error('Internal error, no sender provided by GitHub');
+      throw new Error('Internal error, no sender provided by GitHub a');
     }
 
     if (eventName === 'issues') {
