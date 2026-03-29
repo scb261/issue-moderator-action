@@ -50,18 +50,18 @@ describe('urlsFromIssueBody', () => {
   it('excludes some URLs', () => {
     (
       [
-        ['foo https://tachiyomi.org/extensions bar', []],
-        ['foo https://github.com/tachiyomiorg bar', []],
-        ['foo user-images.githubusercontent.com/something bar', []],
-        ['foo www.gist.github.com/something bar', []],
+        ['foo https://tachiyomi.org/extensions bar', [], []],
+        ['foo https://github.com/tachiyomiorg bar', [], []],
+        ['foo user-images.githubusercontent.com/something bar', [], []],
+        ['foo www.gist.github.com/something bar', [], []],
         [
           'foo https://github.com/tachiyomiorg/extensions/blob/master/README.md something',
-          [],
+          [], [],
         ],
-        ['foo https://keiyoushi.github.io/extensions bar', []],
+        ['foo https://keiyoushi.github.io/extensions bar', [], []],
       ] as const
-    ).forEach(([body, expectedUrls]) => {
-      expect(urlsFromIssueBody(body)).toStrictEqual(expectedUrls);
+    ).forEach(([body, sections, expectedUrls]) => {
+      expect(urlsFromIssueBody(body, sections)).toStrictEqual(expectedUrls);
     });
   });
 });
