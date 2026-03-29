@@ -55,9 +55,16 @@ export function cleanUrl(url: string): string {
 }
 
 function findSection(body: string, sectionName: string) {
+  console.log('Searching in body:');
+  console.log(body);
   const start = body.indexOf(`# ${sectionName}`);
+  console.log(`Found start: ${start}`);
   if (start == -1) return false;
 
   const end = body.indexOf('\n#', start + 1);
-  return body.substring(start, end);
+  console.log(`Found end: ${end}`);
+  const section = body.substring(start, end);
+  console.log('Found section:');
+  console.log(section);
+  return section;
 }
