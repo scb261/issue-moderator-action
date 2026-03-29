@@ -39,7 +39,7 @@ describe('urlsFromIssueBody', () => {
     - [X] I have updated all installed extensions.
     - [X] I have checked if the source URL is not already updated by opening WebView.
     - [X] I will fill out all of the requested information in this form.`,
-          'Source new URL', ['wings.sbs'],
+          ['Source new URL'], ['wings.sbs'],
         ],
       ] as const
     ).forEach(([body, sections, expectedUrls]) => {
