@@ -6,13 +6,13 @@ describe('urlsFromIssueBody', () => {
   it('extracts URLs', () => {
     (
       [
-        ['foo https://example.org bar', ['example.org']],
+        ['foo https://example.org bar', [], ['example.org']],
         [
-          'foo https://example.ORG google.co.UK bar',
+          'foo https://example.ORG google.co.UK bar', [],
           ['example.org', 'google.co.uk'],
         ],
         [
-          'foo http://stupidlylongtld.NORTHWESTERNMUTUAL',
+          'foo http://stupidlylongtld.NORTHWESTERNMUTUAL', [],
           ['stupidlylongtld.northwesternmutual'],
         ],
         [
@@ -23,6 +23,10 @@ describe('urlsFromIssueBody', () => {
     ### Source new URL
 
     wings.sbs
+
+    ### Ignored section
+
+    example.com
 
     ### Other details
 
@@ -35,11 +39,11 @@ describe('urlsFromIssueBody', () => {
     - [X] I have updated all installed extensions.
     - [X] I have checked if the source URL is not already updated by opening WebView.
     - [X] I will fill out all of the requested information in this form.`,
-          ['wings.sbs'],
+          'Source new URL', ['wings.sbs'],
         ],
       ] as const
-    ).forEach(([body, expectedUrls]) => {
-      expect(urlsFromIssueBody(body)).toStrictEqual(expectedUrls);
+    ).forEach(([body, sections, expectedUrls]) => {
+      expect(urlsFromIssueBody(body, sections)).toStrictEqual(expectedUrls);
     });
   });
 
