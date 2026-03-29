@@ -29,13 +29,13 @@ export function urlsFromIssueBody(body: string, sections: string[]): string[] {
   }
 
   const urls = new Set<string>();
-  for (let text in textsToSearch) {
+  for (let text of textsToSearch) {
     console.log('Searching for URLs in the following text:')
     console.log(text)
-    urls.add(urlsFromString(text)
+    urlsFromString(text)
       .filter((url) => !EXCLUSION_LIST.includes(url))
       .filter((url) => EXCLUDED_DOMAINS.every((domain) => !url.endsWith(domain)))
-    );
+      .map((url) => urls.add(url));
   }
   return Array.from(urls);
 }
@@ -52,5 +52,7 @@ function findSection(body: string, sectionName: string) {
   if (start == -1) return false;
 
   const end = body.indexOf('\n#', start + 1);
+  if (end == -1) return body.substring(start);
+
   return body.substring(start, end);
 }
