@@ -30,8 +30,6 @@ export function urlsFromIssueBody(body: string, sections: string[]): string[] {
 
   const urls = new Set<string>();
   for (let text of textsToSearch) {
-    console.log('Searching for URLs in the following text:')
-    console.log(text)
     urlsFromString(text)
       .filter((url) => !EXCLUSION_LIST.includes(url))
       .filter((url) => EXCLUDED_DOMAINS.every((domain) => !url.endsWith(domain)))
