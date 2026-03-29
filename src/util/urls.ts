@@ -15,11 +15,29 @@ export function urlsFromString(str: string): string[] {
   return Array.from(str.matchAll(URL_REGEX)).map((url) => cleanUrl(url[0]));
 }
 
-export function urlsFromIssueBody(body: string): string[] {
-  const urls = urlsFromString(body)
-    .filter((url) => !EXCLUSION_LIST.includes(url))
-    .filter((url) => EXCLUDED_DOMAINS.every((domain) => !url.endsWith(domain)));
-  return Array.from(new Set(urls));
+export function urlsFromIssueBody(body: string, sections: string[]): string[] {
+  const textsToSearch = [] as string[];
+  if (sections && sections.length) {
+    // if sections are properly defined, seach only those sections
+    for (let sectionName of sections) {
+      const sectionContent = findSection(body, sectionName);
+      if (sectionContent) textsToSearch.push(sectionContent);
+    }
+  } else {
+    // if no sections are defined, seach the whole body
+    textsToSearch.push(body)
+  }
+
+  const urls = new Set<string>();
+  for (let text in textsToSearch) {
+    console.log('Searching for URLs in the following text:')
+    console.log(text)
+    urls.add(urlsFromString(text)
+      .filter((url) => !EXCLUSION_LIST.includes(url))
+      .filter((url) => EXCLUDED_DOMAINS.every((domain) => !url.endsWith(domain)))
+    );
+  }
+  return Array.from(urls);
 }
 
 export function cleanUrl(url: string): string {
@@ -27,4 +45,12 @@ export function cleanUrl(url: string): string {
     .toLowerCase()
     .replace(/(https?:\/\/)?(www\.)?/g, '')
     .replace(/\/$/, '');
+}
+
+function findSection(body: string, sectionName: string) {
+  const start = body.indexOf(`# ${sectionName}`);
+  if (start == -1) return false;
+
+  const end = body.indexOf('\n#', start + 1);
+  return body.substring(start, end);
 }
