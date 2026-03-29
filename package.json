@@ -10,8 +10,8 @@
   "main": "dist/index.js",
   "scripts": {
     "format": "prettier --write .",
-    "test": "vitest --run",
-    "test:integ": "vitest --config vitest.config.integ.ts",
+    "test": "vitest --run --no-file-parallelism --disable-console-intercept",
+    "test:integ": "vitest --config vitest.config.integ.ts --no-file-parallelism --disable-console-intercept",
     "build": "node esbuild.config.mjs",
     "prepare": "pnpm run format && pnpm run test && pnpm run build"
   },
