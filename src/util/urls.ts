@@ -16,6 +16,10 @@ export function urlsFromString(str: string): string[] {
 }
 
 export function urlsFromIssueBody(body: string, sections: string[]): string[] {
+  console.log('Received params:')
+  console.log(body)
+  console.log(sections)
+
   const textsToSearch = [] as string[];
   if (sections && sections.length) {
     // if sections are properly defined, seach only those sections
@@ -27,6 +31,9 @@ export function urlsFromIssueBody(body: string, sections: string[]): string[] {
     // if no sections are defined, seach the whole body
     textsToSearch.push(body)
   }
+
+  console.log("Will try to search in the following texts:")
+  console.log(textsToSearch);
 
   const urls = new Set<string>();
   for (let text in textsToSearch) {
