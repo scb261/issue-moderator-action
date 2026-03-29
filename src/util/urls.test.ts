@@ -24,7 +24,7 @@ describe('urlsFromIssueBody', () => {
 
     wings.sbs
 
-    ### Ignored section
+### Ignored section
 
     example.com
 
