@@ -39,10 +39,10 @@ export function urlsFromIssueBody(body: string, sections: string[]): string[] {
   for (let text of textsToSearch) {
     console.log('Searching for URLs in the following text:')
     console.log(text)
-    urls.add(urlsFromString(text)
+    urlsFromString(text)
       .filter((url) => !EXCLUSION_LIST.includes(url))
       .filter((url) => EXCLUDED_DOMAINS.every((domain) => !url.endsWith(domain)))
-    );
+      .map((url) => urls.add(url));
   }
   return Array.from(urls);
 }
