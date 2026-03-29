@@ -60,6 +60,31 @@ describe('urlsFromIssueBody', () => {
       expect(urlsFromIssueBody(body, sections)).toStrictEqual(expectedUrls);
     });
   });
+
+  const sectionsExample =
+`### First
+one.tld
+### Middle
+www.two.tld
+### Empty
+just some text
+### Last
+https://three.tld
+`;
+
+  it('checks sections', () => {
+    (
+      [
+        [ sectionsExample, ['First'], ['one.tld']],
+        [ sectionsExample, ['Middle'], ['two.tld']],
+        [ sectionsExample, ['Last'], ['three.tld']],
+        [ sectionsExample, ['First', 'Last', 'Non-existent'], ['one.tld', 'three.tld']],
+        [ sectionsExample, ['Empty'], []],
+      ] as const
+    ).forEach(([body, sections, expectedUrls]) => {
+      expect(urlsFromIssueBody(body, sections)).toStrictEqual(expectedUrls);
+    });
+  });
 });
 
 describe('cleanUrl', () => {
