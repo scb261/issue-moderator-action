@@ -36,7 +36,7 @@ export function urlsFromIssueBody(body: string, sections: string[]): string[] {
   console.log(textsToSearch);
 
   const urls = new Set<string>();
-  for (let text in textsToSearch) {
+  for (let text of textsToSearch) {
     console.log('Searching for URLs in the following text:')
     console.log(text)
     urls.add(urlsFromString(text)
