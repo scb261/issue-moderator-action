@@ -97,7 +97,8 @@ inputs:
       A JSON-compliant string containing a list of issue sections to check for URLs. Applies to duplicate and existing checks.
       If defined, only the specified sections are checked.
       If not defined or if an empty list is provided, the whole issue body is checked.
-    default: []
+    default: |
+      []
 
   auto-close-rules:
     required: false
