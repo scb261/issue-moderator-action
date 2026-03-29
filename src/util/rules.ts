@@ -31,7 +31,7 @@ export function evaluateRules(
         rule.closeIfMatch,
       );
       const failed = regexMatches.length > 0;
-      const match = regexMatches?.[0]?.[0] ?? '\\\\<No match\\\\>';
+      const match = regexMatches?.[0]?.[1] ?? '\\\\<No match\\\\>';
       const message = rule.message.replace(/\{match\}/g, match);
 
       if (failed) {
