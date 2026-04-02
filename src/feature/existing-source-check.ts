@@ -86,7 +86,7 @@ export async function checkForExistingSource() {
   }
 
   if (!existingExtension) {
-    core.info(`Existing extension with the URL "${requestUrl}" was not found.`);
+    core.info(`No existing extensions were found for the provided URLs: ${issueUrls.join(", ")}.`);
     return;
   }
 
