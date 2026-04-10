@@ -6,12 +6,16 @@ import { deleteIssue } from '../src/util/issues';
 
 const octokit = new Octokit();
 
+const body =
+`### URL section
+Please add https://mangadex.org/!`;
+
 describe('Existing source check', () => {
   test('Issue created for an existing source gets automatically closed', async () => {
     const createdIssue = await octokit.issues.create({
       ...baseIssueMetadata,
       title: '[Test] This should be closed since the source already exists',
-      body: 'Please add https://mangadex.org/!',
+      body: body,
       labels: ['enhancement', 'test'],
     });
 
