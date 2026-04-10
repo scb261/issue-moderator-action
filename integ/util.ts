@@ -3,7 +3,7 @@ import { Octokit } from '@octokit/action';
 import { GitHubClient } from '../src/types';
 
 export const baseIssueMetadata = {
-  owner: 'keiyoushi',
+  owner: 'scb261',
   repo: 'issue-moderator-action',
 };
 
