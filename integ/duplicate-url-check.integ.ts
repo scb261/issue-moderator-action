@@ -6,14 +6,21 @@ import { deleteIssue } from '../src/util/issues';
 
 const octokit = new Octokit();
 
+const bodyBase =
+`This is used for testing the duplicate issue check.
+### URL section
+Please add https://foobar.com/!`;
+
+const bodyDuplicate =
+`### URL section
+Please add https://foobar.com/!`;
+
 describe('Duplicate URL check', () => {
   beforeAll(async () => {
     const createdIssue = await octokit.issues.create({
       ...baseIssueMetadata,
       title: '[Test] Issue for duplicate checks',
-      body: `This is used for testing the duplicate issue check.
-
-  Please add https://foobar.com/!`,
+      body: bodyBase,
       labels: ['enhancement', 'do-not-autoclose', 'test'],
     });
     console.log(`Created baseline issue #${createdIssue.data.number}`);
@@ -33,7 +40,7 @@ describe('Duplicate URL check', () => {
     const createdIssue = await octokit.issues.create({
       ...baseIssueMetadata,
       title: '[Test] This should be closed as a duplicate of an open issue',
-      body: 'Please add https://foobar.com/!',
+      body: bodyDuplicate,
       labels: ['enhancement', 'test'],
     });
 
